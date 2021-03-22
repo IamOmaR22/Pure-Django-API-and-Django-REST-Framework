@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# APPEND_TRAILING_SLASH = False  # When we don't want to add a trailing / slash into urls.
+
 
 # Application definition
 
