@@ -27,9 +27,10 @@ def get_list():  # ---> Lists all this out.
 def create_update():
     new_data = {
         'user': 1,
-        'content': 'Another new cool update'
+        'content': 'Another more cool content'
     }
-    r = requests.post(BASE_URL + ENDPOINT, data=new_data)  # post method
+    r = requests.post(BASE_URL + ENDPOINT + '1/', data=new_data)  # post method
+    # r = requests.post(BASE_URL + ENDPOINT, data=new_data)  # post method
     # r = requests.delete(BASE_URL + ENDPOINT, data=new_data)  # delete method
     print(r.headers)
     print(r.status_code)
