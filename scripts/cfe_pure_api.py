@@ -29,7 +29,8 @@ def create_update():
         'user': 1,
         'content': 'Another more cool content'
     }
-    r = requests.post(BASE_URL + ENDPOINT + '1/', data=json.dumps(new_data))  # post method
+    r = requests.post(BASE_URL + ENDPOINT, data=json.dumps(new_data))  # post method
+    # r = requests.post(BASE_URL + ENDPOINT + '1/', data=json.dumps(new_data))  # post method
     # r = requests.post(BASE_URL + ENDPOINT, data=new_data)  # post method
     # r = requests.delete(BASE_URL + ENDPOINT, data=new_data)  # delete method
     print(r.headers)
@@ -47,9 +48,11 @@ def create_update():
 
 def do_obj_update():
     new_data = {
-        'content': 'New obj data'
+        'content': 'Some new awesome content'
     }
+    # r = requests.put(BASE_URL + ENDPOINT + '1/', data=new_data) #json.dumps(new_data))  # put method
     r = requests.put(BASE_URL + ENDPOINT + '1/', data=json.dumps(new_data))  # put method
+    # r = requests.put(BASE_URL + ENDPOINT + '100/', data=json.dumps(new_data))  # put method
     # new_data = {
     #     'id': 1,
     #     'content': 'New obj data'
@@ -63,14 +66,15 @@ def do_obj_update():
         return r.json()
     return r.text
 
-print(do_obj_update())
+# print(do_obj_update())
 
 
 def do_obj_delete():
     new_data = {
-        'content': 'New obj data'
+        'content': 'Some new awesome content'
     }
     r = requests.delete(BASE_URL + ENDPOINT + '1/')  # delete method
+    # r = requests.delete(BASE_URL + ENDPOINT + '5/')  # give 1 or 2 or 5 etc.. You can delete which one you added.
 
     # print(r.headers)
     print(r.status_code)
@@ -78,3 +82,5 @@ def do_obj_delete():
         # print(r.json())
         return r.json()
     return r.text
+
+print(do_obj_delete())
