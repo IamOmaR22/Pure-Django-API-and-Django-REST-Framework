@@ -1,0 +1,68 @@
+$ python manage.py shell
+
+>>> import json
+>>> data = {'abc': 123}
+>>> data_list = ['abc']
+>>> data_json = json.dumps(data)
+>>> data_json
+'{"abc": 123}'
+>>> load_json = json.loads(data_json)
+>>> load_json['abc']
+123
+>>> load_json['abc'] * 132401
+16285323
+>>> from status.models import Status
+>>> from status.api.serializers import StatusSerializer
+>>> obj = Status.objects.first()
+>>> obj
+<Status: Some content>
+>>> data = StatusSerializer(obj)
+>>> data
+StatusSerializer(<Status: Some content>):
+    user = PrimaryKeyRelatedField(queryset=User.objects.all())
+    content = CharField(allow_blank=True, allow_null=True, required=False, style={'base_template': 'textarea.html'})
+    image = ImageField(allow_null=True, max_length=100, required=False)
+>>> data.data
+{'user': 1, 'content': 'Some content', 'image': None}
+
+>>> from status.models import Status
+>>> from status.api.serializers import StatusSerializer
+>>> obj = Status.objects.first()
+>>> obj
+<Status: Some content>
+>>> data = StatusSerializer(obj)
+>>> data
+StatusSerializer(<Status: Some content>):
+    user = PrimaryKeyRelatedField(queryset=User.objects.all())
+    content = CharField(allow_blank=True, allow_null=True, required=False, style={'base_template': 'textarea.html'})
+    image = ImageField(allow_null=True, max_length=100, required=False)
+>>> data.data
+{'user': 1, 'content': 'Some content', 'image': None}
+>>> import json
+>>> from rest_framework.renderers import JSONRenderer
+>>> new_json_data = JSONRenderer().render(data.data)
+>>> print(new_json_data)
+b'{"user":1,"content":"Some content","image":null}'
+>>> json.loads(new_json_data)
+{'user': 1, 'content': 'Some content', 'image': None}
+>>> from django.utils.six import BytesIO
+>>> from rest_framework.parsers import JSONParser
+>>> json = new_json_data
+>>> stream = BytesIO(json)
+>>> data = JSONParser().parse(stream)
+>>> data
+>>> qs = Status.objects.all()
+>>> serializer = StatusSerializer(qs, many=True)
+>>> serializer.data
+[OrderedDict([('user', 1), ('content', 'Some content'), ('image', None)])]
+>>> json_data = JSONRenderer().render(serializer.data)
+>>> json_data
+b'[{"user":1,"content":"Some content","image":null}]'
+>>> import json
+>>> json.loads(json_data)
+[{'user': 1, 'content': 'Some content', 'image': None}]
+>>> stream = BytesIO(json_data)
+>>> data = JSONParser().parse(stream)
+>>> data
+[{'user': 1, 'content': 'Some content', 'image': None}]
+>>>
