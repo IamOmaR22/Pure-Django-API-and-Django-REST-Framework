@@ -41,6 +41,7 @@ data = {'user': 1}
 serializer = StatusSerializer(data=data)
 serializer.is_valid()
 serializer.save()
+
 Status.objects.count()
 Status.objects.all()
 
@@ -52,9 +53,33 @@ Status.objects.all()
 '''
 Update obj
 '''
+obj = Status.objects.first() 
+data = {'content': 'Some new content', 'user': 1}
+update_serializer = StatusSerializer(obj, data=data)
+update_serializer.is_valid()
+update_serializer.save()
+
+# update_serializer.errors  # You can see the error or validation
 
 
 
 '''
 Delete obj
 '''
+# Create an object to delete.
+data = {'user': 1, 'content': 'Please delete me'}
+create_obj_serializer = StatusSerializer(data=data)
+create_obj_serializer.is_valid()
+create_obj = create_obj_serializer.save()  # Instance of the object
+print(create_obj)
+create_obj.id  # id is 9
+
+# Delete that created object
+# data = {'id': 9}
+obj = Status.objects.last()  # Recent one
+get_data_serializer = StatusSerializer(obj)
+# update_serializer.is_valid()
+# update_serializer.save()
+print(get_data_serializer)
+print(get_data_serializer.data)
+print(obj.delete())
