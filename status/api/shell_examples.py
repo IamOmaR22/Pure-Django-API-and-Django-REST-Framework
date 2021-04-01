@@ -83,3 +83,21 @@ get_data_serializer = StatusSerializer(obj)
 print(get_data_serializer)
 print(get_data_serializer.data)
 print(obj.delete())
+
+
+
+'''
+Custom Fields in serializers
+'''
+from rest_framework import serializers
+class CustomSerializer(serializers.Serializer):
+    content = serializers.CharField()
+    email = serializers.EmailField()
+
+
+CustomSerializer()
+data = {'email': 'hello@gmail.com', 'content': 'Please delete me'}
+create_obj_serializer = CustomSerializer(data=data)
+if create_obj_serializer.is_valid():
+    valid_data = create_obj_serializer.data
+    print(valid_data)

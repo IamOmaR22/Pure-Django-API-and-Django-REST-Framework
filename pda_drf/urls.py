@@ -26,4 +26,5 @@ urlpatterns = [
     path('json/serialized/list', SerializedListView.as_view()),
     path('json/serialized/detail', SerializedDetailView.as_view()),
     path('api/updates/', include('updates.api.urls')),  # api/updates/ --> list api/updates/1/ --> detail
+    path('api/status/', include('status.api.urls')),
 ]
