@@ -36,6 +36,51 @@ class StatusAPIView(ListAPIView):
         return qs
 
 
+class StatusCreateAPIView(generics.CreateAPIView):
+    permission_classes = []
+    authentication_classes = []
+    queryset = Status.objects.all()
+    serializer_class = StatusSerializer
+
+    # def perform_create(self, serializer):
+    #     serializer.save(user=self.request.user)  # Pass an argument whatever i want.
+
+
+class StatusDetailAPIView(generics.RetrieveAPIView):
+    permission_classes = []
+    authentication_classes = []
+    queryset = Status.objects.all()
+    serializer_class = StatusSerializer
+    # lookup_field = 'id'  # 'slug'
+
+    def get_object(self, *args, **kwargs):
+        kwargs = self.kwargs
+        kw_id = kwargs.get('id')  # 'id' from urls.py. We will give here what I gave in urls.
+        return Status.objects.get(id=kw_id)
+
+
+class StatusUpdateAPIView(generics.UpdateAPIView):
+    permission_classes = []
+    authentication_classes = []
+    queryset = Status.objects.all()
+    serializer_class = StatusSerializer
+    lookup_field = 'id'
+
+
+class StatusDeleteAPIView(generics.DestroyAPIView):
+    permission_classes = []
+    authentication_classes = []
+    queryset = Status.objects.all()
+    serializer_class = StatusSerializer
+    lookup_field = 'id'
+
+
+
+
+
+
+
+
 # class StatusCreateView(CreateView):
 #     queryset = Status.objects.all()
 #     form_class = StatusForm
