@@ -31,16 +31,24 @@ r = requests.post(AUTH_ENDPOINT, data=json.dumps(data), headers=headers)
 token = r.json()['token']
 # print(token)
 
-refresh_data = {
-    'token': token
+# refresh_data = {
+#     'token': token
+# }
+
+# new_response = requests.post(REFRESH_ENDPOINT, data=json.dumps(refresh_data), headers=headers)
+# new_token = new_response.json()#['token']
+# print(new_token)
+
+
+
+headers = {
+    "Content-Type": "application/json",
+    "Authorization": "JWT" + token,
 }
 
-new_response = requests.post(REFRESH_ENDPOINT, data=json.dumps(refresh_data), headers=headers)
-new_token = new_response.json()#['token']
-print(new_token)
-
-
-
+post_data = json.dumps({'content': 'Some random content'})
+posted_response = requests.post(ENDPOINT, data=post_data, headers=headers)
+print(posted_response.text)
 
 
 
