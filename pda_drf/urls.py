@@ -16,10 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
+
 from updates.views import json_example_view, JsonCBV, JsonCBV2, SerializedListView, SerializedDetailView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/auth/jwt/', obtain_jwt_token),
+    path('api/auth/jwt/refresh/', refresh_jwt_token),
     path('json/cbv', JsonCBV.as_view()),
     path('json/cbv2', JsonCBV2.as_view()),
     path('', json_example_view),
