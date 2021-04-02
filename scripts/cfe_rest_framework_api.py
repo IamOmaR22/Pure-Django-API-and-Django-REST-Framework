@@ -67,3 +67,22 @@ def do_img(method='get', data={}, is_json=True, img_path=None):
 
 # do_img(method='post', data={'user': 1, 'content': ''}, is_json=False, img_path=image_path)
 do_img(method='put', data={'id': 17, 'user': 1, 'content': 'Some new biki content'}, is_json=False, img_path=image_path) # it will create another one. Will not update.
+
+
+
+
+get_endpoint = ENDPOINT + str(17)
+post_data = json.dumps({'content': 'Some random content'})
+
+r = requests.get(get_endpoint)
+print(r.text)
+
+r2 = requests.get(ENDPOINT)
+print(r2.status_code)
+
+post_headers = {
+    'content-type': 'application/json'
+}
+
+post_response = requests.post(ENDPOINT, data=post_data, headers=post_headers)
+print(post_response.text)

@@ -131,3 +131,6 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(os.path.dirname('pda_drf'), 'static-server', 'media-root')  # Specify the folder. I gave pda_drf
 # MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static-server', 'media-root') # Base directory
 MEDIA_URL = '/media/'
+
+
+from pda_drf.restconf.main import *

@@ -27,8 +27,8 @@ UpdateModelMixin  ----  PUT method
 DestroyModelMixin  ----  DELETE method
 '''
 class StatusAPIDetailView(mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.RetrieveAPIView):
-    permission_classes = []
-    authentication_classes = []
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    # authentication_classes = []
     serializer_class = StatusSerializer
     queryset = Status.objects.all()
     lookup_field = 'id'
@@ -55,8 +55,8 @@ class StatusAPIDetailView(mixins.UpdateModelMixin, mixins.DestroyModelMixin, gen
 
 class StatusAPIView(mixins.CreateModelMixin, generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]  # Is this person authenticated or not. Also can see the list
-    # permission_classes = [permissions.IsAuthenticated]  # Is this person authenticated or not.
-    authentication_classes = [SessionAuthentication]  # How they can be authenticted. Oauth, JWT
+    # # permission_classes = [permissions.IsAuthenticated]  # Is this person authenticated or not.
+    # authentication_classes = [SessionAuthentication]  # How they can be authenticted. Oauth, JWT
     serializer_class = StatusSerializer
     passed_id = None
 
